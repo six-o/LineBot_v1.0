@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>註冊</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="row" style="margin: 10px">
+            <div class="col-12" style="margin: 10px">
+                <h3>註冊</h3>
+                <label>帳號</label>
+                <input
+                    type="text"
+                    id="username"
+                    class="username form-control"
+                    required
+                />
+                <br />
+                <label>密碼</label>
+                <input
+                    type="password"
+                    id="password"
+                    class="password form-control"
+                    required
+                />
+                <br />
+                <label>確認密碼</label>
+                <input
+                    type="password"
+                    id="confirm_password"
+                    class="confirm_password form-control"
+                    required
+                />
+                <br />
+                <button class="btn btn-primary btn-block" id="btn_register">
+                    註冊
+                </button>
+            </div>
+        </div>
+        <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        <script>
+            async function initializeLiff() {
+                try {
+                    await liff.init({ liffId: "2006706294-7MQKmOZ9" });
+                    console.log("LIFF 初始化成功！");
+                } catch (error) {
+                    console.error("LIFF 初始化失敗:", error);
+                    alert("LIFF 初始化失敗，請稍後再試！");
+                }
+            }
+            async function register(
+                username,
+                password,
+                confirmPassword
+            ) {
+                // 檢查欄位是否填寫完整
+                if (!username || !password || !confirmPassword) {
+                    alert("所有欄位都必須填寫！");
+                    return;
+                }
+
+                // 檢查密碼是否一致
+                if (password !== confirmPassword) {
+                    alert("密碼與確認密碼不一致！");
+                    return;
+                }
+
+                try {
+                    // 發送註冊資料至伺服器
+                    const response = fetch("/register", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            username,
+                            password,
+                        }),
+                    });
+
+                    const result = response.json();
+
+                    // if (result.status === "success") {
+                    //     alert("註冊成功！");
+                        
+                    // } else {
+                    //     alert(`註冊失敗：${result.message}`);
+                    // }
+                } catch (error) {
+                    console.error("註冊過程中發生錯誤:", error);
+                    alert("註冊失敗，請稍後再試！", error);
+                    consle.log(error);
+                }
+            }
+
+            $(document).ready(function () {
+                $("#btn_register").click(function () {
+                    const username = $("#username").val();
+                    const password = $("#password").val();
+                    const confirmPassword = $("#confirm_password").val();
+                    register(username, password, confirmPassword);
+                });
+            });
+        </script>
+    </body>
+</html>
