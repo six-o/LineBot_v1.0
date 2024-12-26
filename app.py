@@ -855,11 +855,11 @@ def callback():
     return "OK"
 
 
-line_bot_api = LineBotApi(
-    "z2uS3YGDyn589qxGU6NgU4/DTn9y+FU69lgm9BHvE6ma+nWSdxgCeVour9cjljF+6zEM8tK+tT34V5s904nvfaGDLgUqIXJOyg/fMKYJmAx8zoMhhkF8aTb0QRkG/46xfAvQQjBPO72sXKVRy4T6dgdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("6a80dfb05eccbe33d199d3497e7ef0a3")
-# line_bot_api = LineBotApi(os.environ.get('Channel_Access_Token'))
-# handler = WebhookHandler(os.environ.get('Channel_Secret'))
+# line_bot_api = LineBotApi(
+#     "z2uS3YGDyn589qxGU6NgU4/DTn9y+FU69lgm9BHvE6ma+nWSdxgCeVour9cjljF+6zEM8tK+tT34V5s904nvfaGDLgUqIXJOyg/fMKYJmAx8zoMhhkF8aTb0QRkG/46xfAvQQjBPO72sXKVRy4T6dgdB04t89/1O/w1cDnyilFU=")
+# handler = WebhookHandler("6a80dfb05eccbe33d199d3497e7ef0a3")
+line_bot_api = LineBotApi(os.environ.get('Channel_Access_Token'))
+handler = WebhookHandler(os.environ.get('Channel_Secret'))
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:12345678@localhost/project'
 
